@@ -1,0 +1,83 @@
+/* Container for all cards */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f8ff; /* AliceBlue background */
+  }
+  
+  /* Card styling */
+  .card1 {
+    background-color: white;
+    border: 2px solid #072340; /* Blue border */
+    border-radius: 10px;
+    width: 600px;
+    /* height: 400px; */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .card_data:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Card header */
+  .card-header1 {
+    background-color: #206cb8; /* Blue background */
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Card body */
+  .card-body1 {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  /* Image styling */
+  .card-image1 {
+    width: 95%;
+    height: 300px;
+    max-height: 350px; /* Adjust image height */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  /* Card description */
+  .card-description1 {
+    font-size: 16px;
+    color: #333;
+  }
+  .legend {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*  */
+
+.animate-icon:hover {
+  transform: scale(1.2);
+  color: black; /* Change the icon color on hover */
+}
+.profile_Cards:hover {
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-5px);
+}
+
+.profile_Cards1:hover {
+ cursor: pointer;
+}
+
+
+
+

@@ -1,0 +1,142 @@
+
+.sidenav
+{
+    background-color: midnightblue;
+    height: 700px;
+    /* width: 300px; */
+}
+
+.landingpage_img {
+    background-image: url('assets/LandingPage.jpg');
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.landingpage_text {
+    font-family: 'Beth Ellen';
+    font-size: 10px;
+    color: whitesmoke !important
+}
+
+.landingpage2_img {
+    /* background-image: url('https://b.zmtcdn.com/data/pictures/chains/3/20524613/53ebe32a1db6815fe7510895e0174ec5.jpg?fit=around|960:500&crop=960:500;*,*'); */
+    /* background-image: url('https://static.wixstatic.com/media/2dfdae_16bc8446e57b4f0b914ad05f11abed29~mv2_d_1800_1200_s_2.jpg/v1/fill/w_640,h_374,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2dfdae_16bc8446e57b4f0b914ad05f11abed29~mv2_d_1800_1200_s_2.jpg'); */
+    /* background-size: cover; */
+    /* opacity: 0.8; */
+    width: 100%;
+    height: 100vh !important; 
+    background-color: rgb(164, 84, 119);
+
+
+}
+
+.cards :hover {
+    cursor: pointer;
+    
+      transform: translateY(-5px);
+}
+
+.landingpage2_img h4 {
+    padding: 30px;
+    font-family: 'Meie Script';
+    font-size: 50px;
+}
+
+.counter_bgimg {
+
+    background-image: url('https://5.imimg.com/data5/SELLER/Default/2023/3/296179680/PK/JO/EG/186596495/ready-made-idli-ready-to-eat-idly-1000x1000.jpeg');
+    /* background-color: rgb(241, 8, 8); */
+    /* background: linear-gradient(red, white, red); */
+    opacity: 0.8;
+    padding: 80px !important;
+    background-size: cover;
+}
+.counter_bgimg2 {
+
+    background-image: url('https://myfoodstory.com/wp-content/uploads/2022/09/Medu-Vada-5-768x768.jpg');
+    /* background-color: rgb(241, 8, 8); */
+    /* background: linear-gradient(red, white, red); */
+    opacity: 0.8;
+    padding: 80px !important;
+    background-size: cover;
+}
+
+.category :hover {
+    cursor: pointer;
+}
+/* .category-cards
+{
+    display: flex;
+    /* height: 400px; */
+    /* max-height: 400px; */
+/* } */ 
+/* Add Counter Button */
+.add-counter-btn {
+    width: 25%;
+    height: 60px;
+    margin-right: 30px;
+    font-size: 20px;
+    float: right;
+    background-color: var(--primary-blue);
+    color: var(--white);
+  }
+  /* Form Modal */
+.submit-btn {
+    display: block;
+    width: 70%;
+    height: 50px;
+    margin: 3000px auto;
+    background-color: var(--primary-blue);
+    color: var(--white);
+  }
+  /* Card header */
+  .card-header2 {
+    background-color: #206cb8; /* Blue background */
+    color: white;
+    /* padding: 15px; */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Card body */
+  .card-body2 {
+    /* padding: 15px; */
+    text-align: center;
+  }
+  
+  /* Image styling */
+  .card-image2 {
+    width: 100%;
+    height:100%;
+    /* max-height: 350px; Adjust image height */
+    /* object-fit: cover; */
+    /* border-radius: 8px; */
+    /* margin-bottom: 10px; */
+  }
+  
+  /* Card description */
+  .card-description2 {
+    font-size: 16px;
+    color: #333;
+  }
+  .legend2 {
+    background: rgba(0, 0, 0, 0.7);
+    color: white; 
+    /* padding: 12px; */
+    /* border-radius: 8px; */
+    font-size: 20px;
+    font-weight: bold; 
+}
+.card2 {
+    background-color: lightblue;
+    border: 2px solid #072340; /* Blue border */
+    border-radius: 10px;
+    width: 200px;
+    /* height: 150px; */
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
