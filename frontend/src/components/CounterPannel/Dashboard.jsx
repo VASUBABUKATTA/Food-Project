@@ -799,11 +799,12 @@ function Dashboard() {
                             <div className='  justify-content-between align-items-center'>
                                 <div className='' style={{ cursor: 'pointer' }} onClick={() => handleClick(item.name)}>
                                     <div className="card card_data" style={{
-                                        backgroundColor: 'aliceblue',
-                                        border: '2px solid black ',
-                                        borderRadius: '10px',
+                                        // backgroundColor: 'aliceblue',
+                                        border: 0,
+                                        // borderRadius: '10px',
                                         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                                        transition: 'transform 0.3s ease',
+                                        transition: 'all ease-in-out 0.5s',
+                                      
                                     }}>
                                         <div className="card-body">
                                             <img src={item.imageUrl} alt="Counter Images" style={{ height: "200px", width: "100%", objectFit: "cover" }} />

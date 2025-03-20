@@ -908,7 +908,8 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 //     },
 // ];
-
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import UserHeader from "./UserHeader";
 
 
 function UserDashboard() {
@@ -981,7 +982,7 @@ function UserDashboard() {
         );
     };
 
-    console.log(cart);
+    // console.log(cart);
 
 
     // const handleAddClick = (item, counterName) => {
@@ -1156,7 +1157,7 @@ function UserDashboard() {
     // };
 
 
-    console.log(selectedCategory);
+    // console.log(selectedCategory);
 
     const handleIncrement = (counterId, counterName, itemName) => {
 
@@ -1235,7 +1236,7 @@ function UserDashboard() {
 
 
 
-    console.log(cart);
+    // console.log(cart);
 
     useEffect(() => {
         AOS.init({
@@ -1265,12 +1266,12 @@ function UserDashboard() {
 
             const res = await Service.get("/counter/getAllWithAllData");
             if (res.status == 200) {
-                console.log(res.data);
+                // console.log(res.data);
                 setAllCountersData(res.data);
             }
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
 
         }
     }
@@ -1320,7 +1321,7 @@ function UserDashboard() {
                 );
                 setTotalAmount(total);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
         };
 
@@ -1335,16 +1336,14 @@ function UserDashboard() {
 
 
     return (
-        <div className=" text-center col-12 col-md-8 mx-auto">
-            <div className='w-100 h-100 mb-2 d-flex text-light w-100  justify-content-between align-items-center' style={{ height: '60px', backgroundColor: 'midnightblue', borderRadius: '5px' }}>
-                <div>
-                    <h3 className="ms-3">The Place Drive In</h3>
-                </div>
-
-            </div>
+        <div style={{backgroundColor:'whitesmoke',minHeight:'100vh'}}>
+        <div className=" text-center mx-auto bg-white"  style={{width:'100%',maxWidth:'500px',minHeight:'100vh'}}>
+            
+               <UserHeader/>
+       
 
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner" style={{ borderRadius: '5px' }}>
+                <div className="carousel-inner" style={{ borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px' }}>
                     {/* <div className="carousel-item active">
                         <img
                             src="https://image.wedmegood.com/resized/720X/uploads/member/2783269/1665386141_ARO__12_.jpg"
@@ -1371,15 +1370,15 @@ function UserDashboard() {
             </div>
 
 
-            <div className="container mt-2" style={{ paddingBottom: '0px' }}>
-                <div className="row row-gap-2">
+            <div className=" mt-2" style={{ paddingBottom: '20px' }}>
+                <div className="row row-gap-2 ">
                     {
                         AllCountersData.length > 0 ? <>
                             {AllCountersData.map((counter, index) => (
                                 <>
                                     {counter.Categories.some(category => category.menu.length > 0) && (<>
                                         <div key={index} className="col-12">
-                                            <div className="card shadow">
+                                            <div className="card ">
                                                 <div className="card-body d-flex justify-content-between align-items-center">
                                                     <h4 className={`fs-6 card-title text-${counter.available ? "primary" : "secondary"} mb-0`}>{counter.counterName}</h4>
                                                     <span
@@ -1420,21 +1419,21 @@ function UserDashboard() {
                                                                         </div>
 
                                                                         {selectedCategory === category && (
-                                                                            <div className="card border-0 text-start w-100 h-100" >
-                                                                                <div className="card-body">
+                                                                            <div className=" border-0 text-start w-100 h-100" >
+                                                                                <div className="">
                                                                                     <ul className="list-group">
                                                                                         {selectedCategory.menu.map((item, itemIndex) => (
                                                                                             <li
                                                                                                 key={itemIndex}
                                                                                                 className={` row list-group-item d-flex justify-conten-between   border-0 text-${item.available ? 'dark' : 'secondary'}`}
                                                                                             >
-                                                                                                <span className="text-start col-8">
+                                                                                                <span className="text-start col-7">
                                                                                                     {item.name} - ₹{item.price}
                                                                                                 </span>
-                                                                                                <span className="col-4">
+                                                                                                <span className="col-5">
                                                                                                     {itemCounts[counter.counterId]?.[item.name] ? (
                                                                                                         <div className="d-flex align-items-center  border border 2px solid black fw-bold fs-4" style={{ borderRadius: '5px' }}>
-                                                                                                            <Button sx={{ backgroundColor: "white" }} className="px-4 py-2">
+                                                                                                            <Button sx={{ backgroundColor: "white" }} className="px-4 py-1">
                                                                                                                 <span className="text-danger" onClick={() => handleDecrement(counter.counterId, counter.counterName, item.name)}>
                                                                                                                     <RemoveSharpIcon />
                                                                                                                 </span>
@@ -1442,7 +1441,23 @@ function UserDashboard() {
                                                                                                                     {/* {itemCounts[item.name]} */}
                                                                                                                     {itemCounts[counter.counterId]?.[item.name] || 0}
                                                                                                                 </span>
-                                                                                                                <span className="text-success" onClick={() => handleIncrement(counter.counterId, counter.counterName, item.name)}>
+                                                                                                                <span className="text-success"  
+                                                                                                                 
+                                                                                                                 onClick={() => {
+                                                                                                                  
+                                                                                                                    const counting = itemCounts[counter.counterId]?.[item.name] || 0 ;
+                                                                                                                    if (counting < 50) {
+                                                                                                                        handleIncrement(counter.counterId, counter.counterName, item.name);
+                                                                                                                    }
+                                                                                                                  }}
+                                                                                                                  style={{ 
+                                                                                                                    cursor: itemCounts[counter.counterId]?.[item.name] >= 50 ? "not-allowed" : "pointer",
+                                                                                                                    pointerEvents: itemCounts[counter.counterId]?.[item.name] >= 50 ? "none" : "auto",
+                                                                                                                    opacity: itemCounts[counter.counterId]?.[item.name] >= 50 ? 0.1 : 1
+                                                                                                                  }}
+                                                                                                                  
+                                                                                                                // onClick={() => handleIncrement(counter.counterId, counter.counterName, item.name)}
+                                                                                                                >
                                                                                                                     <AddSharpIcon />
                                                                                                                 </span>
                                                                                                             </Button>
@@ -1453,7 +1468,7 @@ function UserDashboard() {
                                                                                                             <div className="justify-content-cennter align-items-center border border 2px solid black" style={{ borderRadius: '5px' }}> {
                                                                                                                 item.available ?
                                                                                                                     <Button
-                                                                                                                        className="fw-bold text-blue p-2"
+                                                                                                                        className="fw-bold text-blue"
                                                                                                                         sx={{ backgroundColor: "" }}
                                                                                                                         onClick={() => handleAddClick(item, counter.counterName, counter.counterId)}
 
@@ -1539,18 +1554,25 @@ function UserDashboard() {
                 cart.length > 0 && (
                     <motion.nav
                         className="navbar sticky-bottom bg-success text-light"
-                        style={{ height: "60px", padding: "10px" }}
+                        style={{ height: "", padding: "5px" }}
                         initial={{ opacity: 0, y: 50 }} // Animation starts from bottom
                         animate={{ opacity: 1, y: 0 }} // Moves up smoothly
                         exit={{ opacity: 0, y: 50 }} // Fades out when cart is empty
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="container-fluid text-center d-flex justify-content-between align-items-center">
+                        {/* <div className="container text-center d-flex justify-content-between align-items-center">
                             <a className="navbar-brand text-light fw-bold" href="#">
                                 <span><ShoppingCartIcon /></span>{cart.length} Counter <span>{cart.length > 1 ? 's' : ''}</span> in Cart
                             </a>
                             {/* <h6>{totalAmount}</h6> */}
-                            <h5 onClick={gotoCart}>View Cart <span ><KeyboardArrowRightIcon /></span></h5>
+                            {/* <h5 className="text-end text-light fw-bold" onClick={gotoCart}>View Cart <span ><KeyboardArrowRightIcon /></span></h5>
+                        </div> */} 
+                         <div className="container-fluid text-center d-flex justify-content-between align-items-center">
+                            <a className="navbar-brand text-light fw-bold" href="#">
+                                <span><ShoppingCartIcon /></span>{cart.length} Counter <span>{cart.length > 1 ? 's' : ''}</span> in Cart
+                            </a>
+                            {/* <h6>{totalAmount}</h6> */}
+                            <h6 className=" fw-bold" style={{cursor:'pointer'}} onClick={gotoCart}>View Cart <span className="fs-3 fw-bold"><span className="fs-3" ><DoubleArrowIcon /></span></span></h6>
                         </div>
                     </motion.nav>
                 )
@@ -1561,6 +1583,7 @@ function UserDashboard() {
                 <h2>Sample Animated Text</h2>
             </div> */}
         </div >
+        </div>
     );
 }
 

@@ -10,6 +10,16 @@
   height: 300px;
 }
 
+div#dropdownMenu2 {
+  border: 0;
+}
+
+.card_data:hover {
+  transform: scale(1.08);
+
+}
+
+
 @media (max-width: 768px) {
   .toast {
     font-size: 14px;

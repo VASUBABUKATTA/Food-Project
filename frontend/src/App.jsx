@@ -22,6 +22,7 @@ import QrCode from './components/userPannel/QrCode';
 import UserDashboard from './components/userPannel/UserDashboard';
 import ProtectedRouteAdminPannel from './components/admin/ProtectRouteAdminPannel';
 import ProtectedRouteCounterPannel from './components/CounterPannel/ProtectRouteCounterPannel';
+import ErrorPage from './components/Error';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         {/* Admin Routes : */}
         <Route path='/' element={<HomePage />} />
         <Route path='/logout' element={<HomePage />} />
+        <Route path='/*' element={<ErrorPage />} />
 
         {/* Neasted Routing */}
         <Route path="/nestead/sidenav" element={ <ProtectedRouteAdminPannel><B /></ProtectedRouteAdminPannel> }>

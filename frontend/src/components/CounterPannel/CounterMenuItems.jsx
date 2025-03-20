@@ -681,9 +681,10 @@ function CounterMenuItems() {
                         </div>
                         {categoryList.map((item, index) => (
                             <div className='col-12 col-md-6 col-lg-6 col-xl-4 p-3 text-center align-items-center justify-content-center' key={index}>
-                                <div className='card text-center '
-                                 onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-                                 onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1.0)"}
+                                <div className='card text-center card_data'
+                                //  onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                                //  onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1.0)"}
+
                                  style={cardStyle}
                                 //  style={{ cursor: 'pointer', border: "2px solid black", backgroundColor: "aliceblue", position: "relative", overflow: "hidden", }} 
                                  key={index}>

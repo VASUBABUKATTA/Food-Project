@@ -10,6 +10,7 @@ import CategoryService from "../Api_Services/CategoryService";
 import pic13 from '../../assets/pic13.webp';
 import { Home } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import UserHeader from "./UserHeader";
 
 const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, showItems, handleIncrement, handleDecrement, totalAmount, itemCounts, gotoCart }) => {
 
@@ -31,16 +32,16 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
         userMobile: inputValues.userMobile,
         userName: inputValues.userName
     }
-    console.log(data);
+    // console.log(data);
 
     const amount = data.orderDetails[0]?.totalPrice;
-    console.log(amount, data.orderDetails[0]?.totalPrice)
+    // console.log(amount, data.orderDetails[0]?.totalPrice)
 
     const OrderFun = async () => {
 
         const res = await CategoryService.post("/order/saveOrder", data);
         if (res.status == 201) {
-            console.log("Entered Values:", inputValues);
+            // console.log("Entered Values:", inputValues);
             toast.success("order places successfully");
             setshowOrderDetails(true)
         }
@@ -229,23 +230,26 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
 
 
     return (
-        <div className="">
-            {showdashboard ? (<>
+        <div >
+            {showdashboard ? (<div >
                 <UserDashboard />
-            </>) :
+            </div>) :
                 (
                     <>
-                        <>
-                            <div className="mt-3">
+                        <div style={{backgroundColor:'whitesmoke',minHeight:'100vh'}}>
+
+
+                            {/* <div className="mt-3">
                                 <Typography variant="h5" className="text-center text-primary fw-bold fs-4"  > Payment Page </Typography>
-                            </div>
-                            <div className=" ms-5 me-5 mt-2  boxshadow " >
-                                <div className="m-3">
-                                    <Typography variant="h5" className="text-darkblue fw-bold fs-4">Choose Payment Method Below </Typography>
+                            </div> */}
+                            <div className=" mx-auto bg-white"  style={{width:'100%',maxWidth:'500px',minHeight:'100vh'}}>
+                                <UserHeader />
+                                <div className="ms-2">
+                                    <Typography variant="h5" className="text-darkblue fw-bold fs-4">Choose Payment Method </Typography>
                                 </div>
                                 <form onSubmit={handlePayment} className=" justify-content-center align-items-center">
-                                    <div className=" justify-content-center align-items-center">
-                                        <div className="form-group me-2 justify-content-center align-items-center">
+                                    <div className="ms-5  justify-content-center align-items-center">
+                                        <div className="form-group me-2 justify-content-center align-items-center p-2">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
@@ -256,7 +260,7 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
                                             />
                                             <label htmlFor="razorpay"> RazorPay</label>
                                         </div>
-                                        <div className="form-group me-2 justify-content-center align-items-center">
+                                        <div className="form-group me-2 justify-content-center align-items-center p-2">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
@@ -267,7 +271,7 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
                                             />
                                             <label htmlFor="phonepe"> PhonePe</label>
                                         </div>
-                                        <div className="form-group me-2 justify-content-center align-items-center">
+                                        <div className="form-group me-2 justify-content-center align-items-center p-2">
                                             <input
                                                 type="radio"
                                                 name="paymentMethod"
@@ -282,23 +286,51 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
                                     {/* <div> <Button sx={{ backgroundColor: "blue", margin: '20px' }} className="text-light" onClick={showItems}> Add More items <span><AddSharpIcon /></span> </Button></div> */}
                                     {/* <Button className="text-white   btn btn-blue mt-2" style={{backgroundColor:'darkblue'}} onClick={showItems} >Add More Items <span><AddSharpIcon /></span></Button> */}
                                     {/* <Button className="btn btn-primary mt-2 bg-success text-white" sx={{ width: '200px', float: 'right' }} type="submit">Make Payment</Button> */}
-                                    {paymentMethod && (<>
-                                        <div className="w-25 align-items-center justify-content-center text-center" style={{float:'right',height:'60px',borderRadius:'8px',}}>
+                                    {/* {paymentMethod && (<>
+                                        <div className=" align-items-center justify-content-center text-center" style={{float:'right',height:'80px',borderRadius:'8px',}}>
                                             <motion.div
-                                                className=" bg-success text-light"
-                                                style={{ height: "60px", padding: "10px", position: '' }}
+                                                className=" bg-success"
+                                                style={{ height: "", padding: "", position: '' }}
                                                 initial={{ opacity: 0, y: 50 }} // Animation starts from bottom
                                                 animate={{ opacity: 1, y: 0 }} // Moves up smoothly
                                                 exit={{ opacity: 0, y: 50 }} // Fades out when cart is empty
                                                 transition={{ duration: 0.5 }}
 
                                             >
-                                                {/* <div className="container-fluid text-center d-flex justify-content-between align-items-center"> */}
-                                                    <Button className="btn btn-white mt-2  text-white" sx={{ width: '200px', float: 'right' }} type="submit">Make Payment</Button>
-                                                {/* </div> */}
+                                                         <button className="btn   text-white" sx={{ width: '200px', float: 'right' }} type="submit">Make Payment</button>
+                                               
                                             </motion.div>
                                         </div>
-                                    </>)}
+                                    </>)} */}
+                                    {paymentMethod && (
+                                        <footer
+                                            className="bg-success text-center col-xs-6 col-sm-6 col-md-5 col-lg-4 col-xl-4"
+                                            style={{
+                                                position: "fixed",
+                                                bottom: 0,
+                                                width: "100%",
+                                                maxWidth:'500px',
+                                                overflow:'hidden',
+                                                padding: "10px",
+                                                // borderRadius: "8px",
+                                            }}
+                                        >
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 50 }} // Animation starts from bottom
+                                                animate={{ opacity: 1, y: 0 }} // Moves up smoothly
+                                                exit={{ opacity: 0, y: 50 }} // Fades out when hidden
+                                                transition={{ duration: 0.5 }}
+                                            >
+                                                <Button
+                                                    className="btn text-white"
+                                                    sx={{ width: "200px" }}
+                                                    type="submit"
+                                                >
+                                                    Make Payment
+                                                </Button>
+                                            </motion.div>
+                                        </footer>
+                                    )}
 
                                 </form>
 
@@ -320,7 +352,7 @@ const Payment = ({ inputValues, cartData, cartItems, removeItem, updateCart, sho
                                     </Modal.Body>
                                 </Modal>
                             </div>
-                        </>
+                        </div>
                     </>
                 )}
 

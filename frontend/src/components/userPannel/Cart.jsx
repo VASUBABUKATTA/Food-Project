@@ -16,10 +16,16 @@ import TextField from "@mui/material/TextField";
 import { Modal } from 'react-bootstrap'
 import Service from "../Api_Services/CategoryService";
 import Payment from "./Payment";
+import UserHeader from "./UserHeader";
 
 
 function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, handleDecrement, totalAmount, itemCounts, gotoCart }) {
-    console.log(cartItems);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    // console.log(cartItems);
 
     const [cartData, setCartData] = useState([]);
     const [showPaymentpage, setShowPaymentPage] = useState(false);
@@ -95,7 +101,7 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
                 }));
 
 
-                console.log(updatedItems);
+                // console.log(updatedItems);
 
 
                 // Calculate total price for the counter by summing up all item totalPrices
@@ -213,14 +219,14 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
         setInputValues({ ...inputValues, [name]: value });
         if (name == 'userName')
             setErr({
-                ...err, userNameErr: /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/.test(value) && value.length >= 3 && value.length <= 20 ? "" : "3-20 characters"
+                ...err, userNameErr: /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/.test(value) && value.length >= 3 && value.length <= 20 ? "" : "Invalid fullname"
             })
         else
             setErr((prev) => ({
                 ...prev,
                 userMobileErr: /^[6-9][0-9]{9}$/.test(value)
                     ? ""
-                    : "Invalid mobile number (should start with 6-9 and be 10 digits)",
+                    : "Invalid mobilenumber",
             }));
 
 
@@ -237,14 +243,14 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
             userMobile: inputValues.userMobile,
             userName: inputValues.userName
         }
-        console.log(data);
+        // console.log(data);
 
         const regexUsername = new RegExp(/^[a-zA-Z]{3,60}(?:\s[a-zA-Z]{1,60})*$/);
 
         const regexEmail = new RegExp(/^(?!.*?\.\.)(?!.*?\.(_|_\.|\._))([a-zA-Z0-9]+[a-zA-Z]*)(?:[._][a-zA-Z0-9]+)?(?:[._]?[a-zA-Z0-9]+)?@[a-zA-Z.]+(?:_[a-zA-Z0-9]+)?\.[a-zA-Z]{2,3}$/);
         const regexMobileNo = new RegExp(/^[6-9][0-9]{9}$/);
 
-        console.log(err.userMobileErr == '' && err.userNameErr == '');
+        // console.log(err.userMobileErr == '' && err.userNameErr == '');
 
         if (err.userMobileErr == '' && err.userNameErr == '') {
             try {
@@ -260,7 +266,7 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
 
 
             } catch (error) {
-                console.log(error);
+                // console.log(error);
 
             }
 
@@ -272,107 +278,143 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
     return (
 
         <>
-            <div className="col-12 col-md-8 mx-auto">
+            <div>
 
 
-                <div className='w-100 h-100 mb-2 d-flex text-light w-100  justify-content-between align-items-center' style={{ height: '60px', backgroundColor: 'midnightblue', borderRadius: '5px' }}>
+                {/* <div className='w-100 h-100 mb-2 d-flex text-light w-100  justify-content-between align-items-center' style={{ height: '60px', backgroundColor: 'midnightblue', borderRadius: '5px' }}>
                     <div>
                         <h3 className="ms-3">The Place Drive In</h3>
                     </div>
 
-                </div>
+                </div> */}
                 {showPaymentpage ? (<>
                     <Payment inputValues={inputValues} cartData={cartData} cartItems={cartItems} removeItem={removeItem} updateCart={updateCart} showItems={showItems} handleIncrement={handleIncrement} handleDecrement={handleDecrement} totalAmount={totalAmount} itemCounts={itemCounts} gotoCart={gotoCart} /></>)
                     : (
-                        <>
-                            <div className="container mt-3">
-                                <h4 className="mb-3">Your Cart <ShoppingCartIcon /> </h4>
+                        <div style={{backgroundColor:'whitesmoke',minHeight:'100vh',}}>
+                        <div className=" mx-auto bg-white"  style={{width:'100%',maxWidth:'500px',minHeight:'100vh'}}>
+                            <UserHeader />
+                            <div className=" mt-3">
+                                <div className="container">
+                                    <h4 className="mb-3">Your Cart <ShoppingCartIcon /> </h4>
 
-                                {cartData.length === 0 ? (
-                                    <Typography variant="h6" color="textSecondary">
-                                        Your cart is empty.
-                                    </Typography>
-                                ) : (
+                                    {cartData.length === 0 ? (
+                                        <Typography variant="h6" color="textSecondary">
+                                            Your cart is empty.
+                                        </Typography>
+                                    ) : (
 
-                                    cartData.map((counter, index) => (
-                                        counter?.items?.length > 0 ? (
-                                            <>
-                                                <div className="card m-3" key={index}>
-                                                    <div className="card-body">
-                                                        <Typography variant="h6">{counter.counterName}</Typography>
+                                        cartData.map((counter, index) => (
+                                            counter?.items?.length > 0 &&
+                                            (
+                                                <>
+                                                    <div className="card m-3" key={index}>
+                                                        <div className="card-body">
+                                                            <Typography variant="h6" className="fs-6">{counter.counterName}</Typography>
 
-                                                        {counter.items.map((item, idx) => (
-                                                            <div className="card m-3 p-3" key={idx}>
-                                                                <div className="d-flex justify-content-between align-items-center">
-                                                                    <div>
-                                                                        <Typography variant="body2" color="textSecondary">
-                                                                            {item.itemName}
-                                                                        </Typography>
-                                                                        <Typography variant="body2" color="textSecondary">
-                                                                            Price: {item.totalPrice}
-                                                                        </Typography>
-                                                                    </div>
-
-                                                                    <div className="d-flex align-items-center">
-                                                                        <Button sx={{ backgroundColor: "blue" }} className="text-light">
-                                                                            <span
-                                                                                onClick={() => handleRemoveItems(item.itemName, counter.counterName, counter.counterId)}
-                                                                                sx={{ backgroundColor: "blue", color: "white", minWidth: "40px" }}
-                                                                            >
-                                                                                <RemoveSharpIcon />
-                                                                            </span>
-                                                                            <Typography variant="body1" className="mx-2">
-                                                                                {itemCounts[counter.counterId]?.[item.itemName] || 0}
+                                                            {counter.items.map((item, idx) => (
+                                                                <div className=" mt-2 p-2" key={idx}>
+                                                                    <div className="d-flex justify-content-between align-items-center">
+                                                                        <div>
+                                                                            <Typography variant="body2" color="textSecondary">
+                                                                                {item.itemName}
                                                                             </Typography>
-                                                                            <span
-                                                                                onClick={() => handleAddItems(item.itemName, counter.counterName, counter.counterId)}
-                                                                                sx={{ backgroundColor: "blue", color: "white", minWidth: "40px" }}
-                                                                            >
-                                                                                <AddSharpIcon />
-                                                                            </span>
-                                                                        </Button>
+                                                                            <Typography variant="body2" color="textSecondary">
+                                                                                Price: {item.totalPrice}
+                                                                            </Typography>
+                                                                        </div>
+
+                                                                        <div className="d-flex align-items-center border border 2px solid black" style={{ borderRadius: '5px' }}>
+                                                                            <Button sx={{ backgroundColor: "aliceblue" }} className="">
+                                                                                <span
+                                                                                    onClick={() => handleRemoveItems(item.itemName, counter.counterName, counter.counterId)}
+                                                                                    sx={{ minWidth: "40px" }}
+                                                                                >
+                                                                                    <RemoveSharpIcon className="text-danger" />
+                                                                                </span>
+                                                                                <Typography variant="body1" className="mx-2" sx={{ minWidth: "40px" }}>
+                                                                                    {itemCounts[counter.counterId]?.[item.itemName] || 0}
+                                                                                </Typography>
+                                                                                <span
+                                                                                 onClick={() => {
+                                                                                    // console.log(itemCounts[counter.counterId]?.[item.itemName])
+                                                                                    const counting = itemCounts[counter.counterId]?.[item.itemName] || 0 ;
+                                                                                    if (counting < 50) {
+                                                                                        handleAddItems(item.itemName, counter.counterName, counter.counterId);
+                                                                                    }
+                                                                                }}
+                                                                                // onClick={() => handleAddItems(item.itemName, counter.counterName, counter.counterId)}
+                                                                                style={{ 
+                                                                                    cursor: itemCounts[counter.counterId]?.[item.itemName] >= 50 ? "not-allowed" : "pointer",
+                                                                                    pointerEvents: itemCounts[counter.counterId]?.[item.itemName] >= 50 ? "none" : "auto",
+                                                                                    opacity: itemCounts[counter.counterId]?.[item.itemName] >= 50 ? 0.1 : 1
+                                                                                  }}
+                                                                                    // onClick={() => handleAddItems(item.itemName, counter.counterName, counter.counterId)}
+                                                                                    
+                                                                                >
+                                                                                    <AddSharpIcon className="text-success" />
+                                                                                </span>
+                                                                            </Button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-
-                                                </div>
-
-                                                <div>
-                                                    <div className="d-flex justify-content-center align-items-center">
-                                                        <h6>Missed somthing..?</h6>
-                                                        <Button sx={{ backgroundColor: "blue" }} className="text-light" onClick={showItems}> Add More items <span><AddSharpIcon /></span> </Button>
-                                                    </div>
-                                                    <motion.nav
-                                                        className="navbar sticky-bottom bg-success text-light bottom-0"
-                                                        style={{ height: "80px", padding: "10px", marginTop: "20px" }}
-                                                        initial={{ opacity: 0, y: 0 }} // Animation starts from bottom
-                                                        animate={{ opacity: 1, y: 0 }} // Moves up smoothly
-                                                        exit={{ opacity: 0, y: 50 }} // Fades out when cart is empty
-                                                        transition={{ duration: 0.5 }}
-                                                    >
-                                                        <div className="container-fluid text-center d-flex justify-content-between align-items-center">
-                                                            {/* <a className="navbar-brand text-light fw-bold" href="#"> */}
-                                                            <h5> Total Amount <span className=" fw-bold "><span className="fw-bold"><CurrencyRupeeIcon />{totalAmount}</span></span> </h5>
-                                                            {/* </a>     */}
-                                                            <h5 style={{ cursor: 'pointer' }} onClick={() => setShowPayment(true)}> Continue to Pay <span className="fs-3 fw-bold"><span className="fs-3"><DoubleArrowIcon /></span></span> </h5>
+                                                            ))}
                                                         </div>
-                                                    </motion.nav>
 
-                                                </div>
-                                            </>
-                                        ) : <>
-                                            <h6 className="text-center">Your Cart Empty</h6>
-                                            <div className="d-flex justify-content-center align-items-center mt-5">
-                                                <h6 >Missed somthing..?</h6>
-                                                <Button sx={{ backgroundColor: "blue" }} className="text-light" onClick={showItems}> Add More items <span><AddSharpIcon /></span> </Button>
+                                                    </div>
 
-                                            </div>
-                                        </>
-                                    ))
-                                )
-                                }
+                                                    <div>
+                                                        <>
+
+
+                                                        </>
+                                                    </div>
+                                                </>
+                                            )
+                                        ))
+                                    )
+                                    }
+                                </div>
+
+                                <div className="d-flex container justify-content-between   align-items-center ">
+                                    <h6 style={{ float: 'left' }} className="text-start fw-bold">Missed something...?  </h6>
+                                    <Button sx={{ backgroundColor: "blue", width: '180px', }} className="text-light text-end " onClick={showItems}> Add More items <span><AddSharpIcon /></span> </Button>
+                                </div>
+
+
+                                {/* {cartData.length > 0 && (<>
+                                   
+
+                                    <motion.nav
+                                        className="navbar sticky-bottom bg-success text-light bottom-0"
+                                        style={{ height: "", padding: "10px", marginTop: "20px" }}
+                                        initial={{ opacity: 0, y: 0 }} // Animation starts from bottom
+                                        animate={{ opacity: 1, y: 0 }} // Moves up smoothly
+                                        exit={{ opacity: 0, y: 50 }} // Fades out when cart is empty
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        <div className="container-fluid text-center d-flex justify-content-between align-items-center">
+                                              <h6> Total Amount <span className=" fw-bold "><span className="fw-bold">₹{totalAmount}</span></span> </h6>
+                                          
+                                            <h6 style={{ cursor: 'pointer' }} onClick={() => setShowPayment(true)}> Continue to Pay<span className="fs-3 fw-bold"><span className="fs-3"><DoubleArrowIcon /></span></span> </h6>
+                                        </div>
+                                    </motion.nav>
+                                </>)} */}
+                                <footer className="bg-success  text-light" style={{ position: "fixed", bottom: 0,width:'100%',maxWidth:'500px', padding: "10px",overflow:'hidden' }}>
+                                    {cartData.length > 0 && (
+                                        <motion.nav
+                                            className="container-fluid text-center d-flex justify-content-between align-items-center"
+                                            initial={{ opacity: 0, y: 50 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 50 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <h6> Total Amount: <span className="fw-bold">₹{totalAmount}</span></h6>
+                                            <h6 style={{ cursor: "pointer" }} onClick={() => setShowPayment(true)}>
+                                                Continue to Pay <span className="fs-3 fw-bold"><DoubleArrowIcon /></span>
+                                            </h6>
+                                        </motion.nav>
+                                    )}
+                                </footer>
 
 
                                 <Modal
@@ -400,7 +442,7 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
                                             >
                                                 <TextField
                                                     id="standard-basic"
-                                                    label="FullName"
+                                                    label="Fullname"
                                                     variant="standard"
                                                     name="userName"
                                                     error={err.userNameErr}
@@ -418,7 +460,7 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
 
                                                 <TextField
                                                     id="standard-basic2"
-                                                    label="Mobile"
+                                                    label="Mobilenumber"
                                                     variant="standard"
                                                     name="userMobile"
                                                     error={err.userMobileErr}
@@ -444,7 +486,8 @@ function Cart({ cartItems, removeItem, updateCart, showItems, handleIncrement, h
                                 </Modal>
 
                             </div >
-                        </>
+                        </div>
+                        </div>
                     )}
             </div>
         </>
